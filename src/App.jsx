@@ -22,20 +22,20 @@ function App() {
     <HashRouter>
       <nav>
         <Link className="links" to="/">
-          Home
+          OS's
         </Link>
 
         {!isAuth ? (
           <Link className="links" to="/login">
-            Login
+            Entrar
           </Link>
         ) : (
           <>
             <Link className="links" to="/createpost">
-              Create Post
+              Criar OS
             </Link>
             <button className="links" onClick={signUserOut}>
-              Log Out
+              Sair
             </button>
           </>
         )}
