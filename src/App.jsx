@@ -1,13 +1,12 @@
 import { useState } from "react";
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import CreatePost from "./pages/CreatePost";
-import UploadImage from "./pages/UploadImage"
 import { signOut } from "firebase/auth";
 import { auth } from "./firebase-config";
-
+import { HashRouter, Routes, Route , Link } from "react-router-dom";
+import "./App.css";
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
 
@@ -20,23 +19,23 @@ function App() {
   };
 
   return (
-    <Router>
+    <HashRouter>
       <nav>
         <Link className="links" to="/">
-          OS's
+          Home
         </Link>
 
         {!isAuth ? (
           <Link className="links" to="/login">
-            Entrar
+            Login
           </Link>
         ) : (
           <>
             <Link className="links" to="/createpost">
-              Criar OS
+              Create Post
             </Link>
             <button className="links" onClick={signUserOut}>
-              Sair
+              Log Out
             </button>
           </>
         )}
@@ -45,10 +44,8 @@ function App() {
         <Route path="/" element={<Home isAuth={isAuth}/>} />
         <Route path="/createpost" element={<CreatePost isAuth={isAuth}/>} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
-        <Route path="/uploadimage" element={<UploadImage/>} />
       </Routes>
-    </Router>
+    </HashRouter>
   );
 }
-
 export default App;

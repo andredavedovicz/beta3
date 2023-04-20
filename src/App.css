@@ -110,7 +110,7 @@ textarea {
 }
 
 .loginPage p {
-  font-size: 30px;
+  font-size: 1.2em;
 }
 
 /* GOOGLE BUTTOn */
@@ -226,4 +226,11 @@ textarea {
   flex-direction: row;
   align-items: center;
   justify-items: center;
+}
+h2{
+  font-size: 1.8em;
+}
+img{
+  width: 250px;
+  color: aqua;
 }
