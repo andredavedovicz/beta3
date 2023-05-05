@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import UploadImage from "./UploadImage";
 
+
 function CreatePost({ isAuth }) {
   let navigate = useNavigate();
   const [title, setTitle] = useState("");

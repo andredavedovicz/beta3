@@ -3,6 +3,7 @@ import { deleteDoc, getDocs, doc } from "firebase/firestore";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 import { async } from "@firebase/util";
+import { useNavigate } from "react-router-dom";
 function Home({isAuth}) {
   const [postList, setPostList] = useState([]);
   const postsCollectionRef = collection(db, "postsexample");
@@ -10,8 +11,11 @@ function Home({isAuth}) {
     const postDoc = doc(db, "postsexample", id);
     await deleteDoc(postDoc);
   };
-
+  let navigate = useNavigate();
   useEffect(() => {
+    if (!isAuth) {
+      navigate("/login");
+    }
     const getPosts = async () => {
       const data = await getDocs(postsCollectionRef);
       setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));

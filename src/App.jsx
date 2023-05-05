@@ -5,8 +5,10 @@ import Login from "./pages/Login";
 import CreatePost from "./pages/CreatePost";
 import { signOut } from "firebase/auth";
 import { auth } from "./firebase-config";
-import { HashRouter, Routes, Route , Link } from "react-router-dom";
+import { HashRouter, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
+import Principal from "./pages/Principal";
+import Credentials from "./pages/Credentials";
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
 
@@ -21,16 +23,20 @@ function App() {
   return (
     <HashRouter>
       <nav>
-        <Link className="links" to="/">
-          OS's
-        </Link>
-
         {!isAuth ? (
-          <Link className="links" to="/login">
-            Entrar
-          </Link>
+          <>
+            <Link className="links" to="/login">
+              Entrar
+            </Link>
+            <Link className="links" to="/credentials">
+              Se Credenciar
+            </Link>
+          </>
         ) : (
           <>
+            <Link className="links" to="/home">
+              OS's
+            </Link>
             <Link className="links" to="/createpost">
               Criar OS
             </Link>
@@ -41,9 +47,11 @@ function App() {
         )}
       </nav>
       <Routes>
-        <Route path="/" element={<Home isAuth={isAuth}/>} />
-        <Route path="/createpost" element={<CreatePost isAuth={isAuth}/>} />
+        <Route path="/" element={<Principal />} />
+        <Route path="/home" element={<Home isAuth={isAuth} />} />
+        <Route path="/createpost" element={<CreatePost isAuth={isAuth} />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
+        <Route path="/credentials" element={<Credentials/>} />
       </Routes>
     </HashRouter>
   );
