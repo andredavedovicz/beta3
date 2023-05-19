@@ -13,7 +13,7 @@ function PersonalInfo({ formData, setFormData }) {
       />
       <input
         type="text"
-        placeholder="Cargo..."
+        placeholder="Função Principal..."
         value={formData.cargo}
         onChange={(e) => {
           setFormData({ ...formData, cargo: e.target.value });

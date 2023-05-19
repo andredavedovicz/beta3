@@ -78,7 +78,7 @@ function OtherInfo({ formData, setFormData }) {
       </ul>
       <label className="labelOtherInfo">
         <div className="label">
-          Áreas de Atuação:
+          Todas as funções:
         </div>
         
         <input
