@@ -26,10 +26,10 @@ function App() {
         {!isAuth ? (
           <>
             <Link className="links" to="/login">
-              Entrar
+              Cliente
             </Link>
             <Link className="links" to="/credentials">
-              Se Credenciar
+              Credenciado
             </Link>
           </>
         ) : (
