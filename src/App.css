@@ -1,15 +1,14 @@
-
-
 .App {
   text-align: center;
 }
 body {
   padding: 0%;
   margin: 0%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: rgba( 226, 226, 226);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: rgba(226, 226, 226);
 }
-h1{
+h1 {
   font-size: 1.5em;
 }
 nav {
@@ -17,28 +16,29 @@ nav {
   top: 5px;
   right: 5px;
   left: 5px;
-  width: calc(100vw - 10px);
-  height: 80px; 
+  width: auto;
+  height: 80px;
   background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgba( 226, 226, 226);
+  color: rgba(226, 226, 226);
   text-decoration: none;
   border-radius: 15px;
   margin: 0;
 }
 
 a {
-  color: rgba( 226, 226, 226);
+  color: rgba(226, 226, 226);
   text-decoration: none;
   margin: 10px;
   font-size: 1.5em;
 }
 
 .createPostPage {
-  width: 100%;
-  height: 100%;
+  margin: 5px;
+  width: calc(100vw - 10px);
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -50,7 +50,7 @@ a {
   height: 100%;
   background-color: #757575;
   border-radius: 12px;
-  color: rgba( 226, 226, 226);
+  color: rgb(0, 0, 0);
   display: flex;
   flex-direction: column;
 }
@@ -59,53 +59,79 @@ a {
   text-align: center;
 }
 
-.cpContainer label {
-  font-size: 20px;
-  margin-left: 3px; 
-  
-}
-.cpContainer .inputGp {
-  display: flex;
-  border: 3px solid #4C4D54;
-  border-radius: 8px;
-}
-.inputGp{
+.inputGp,
+.inputGp2 {
   width: 99,99%;
-  max-height: 30%;
+  justify-content: space-between;
+  background-color: #757575;
+  margin: 10px;
+  border: 3px solid #4c4d54;
+  border-radius: 8px;
+  padding: 5px;
+}
+.inputGp {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  justify-content: space-between;
-  background-color: #757575;
+  max-height: 30%;
 }
-.inputGp input,
-.inputGp textarea {
+
+.inputGp2 {
+  display: flex;
+  border: 3px solid #4c4d54;
+  border-radius: 8px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.inputGp label {
+  width: 40%;
+  font-size: 18px;
+  font-weight: 600;
+}
+.inputGp input {
   font-size: 18px;
   border: none;
   border-radius: 2px;
   padding: 5px;
   margin-right: 3px;
-  max-width: 60%;
+  max-width: fit-content;
+  width: 60%;
 }
-
+.inputGp2 label {
+  font-weight: 600;
+  font-size: 18px;
+}
+.inputImg {
+  width: 99%;
+  border: 2px solid rgb(21, 24, 21);
+  border-radius: 5px;
+  font-size: 18px;
+  margin-left: 0;
+  background-color: #4c4d54;
+  color: white;
+}
 
 .inputGp textarea {
   height: 150px;
-}
-
-.cpContainer button {
-  
+  font-size: 20px;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-}
-input,
-textarea {
-  margin-top: 5px;
+  border-radius: 2px;
+  padding: 5px;
+  margin-right: 3px;
+  max-width: 100%;
 }
 
+.buttonImg {
+  background-color: #4c4d54;
+  color: white;
+  width: 120px;
+  font-size: 18px;
+  border: 2px solid rgb(21, 24, 21);
+  border-radius: 5px;
+}
 .loginPage {
   margin-top: 80px;
   width: 100vw;
@@ -114,7 +140,7 @@ textarea {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba( 226, 226, 226);
+  background-color: rgba(226, 226, 226);
 }
 
 .loginPage p {
@@ -161,22 +187,16 @@ textarea {
 }
 
 .homePage {
-  width: 100%;
-  min-height: calc(100vh - 80px);
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
+  width: 90vw;
 }
 
 .homePage .post {
-  width: 90%;
+  width: 90vw;
   height: auto;
   max-height: 600px;
-  background-color: rgba( 226, 226, 226);
+  background-color: rgba(226, 226, 226);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: 20px;
+  margin-bottom: 20px;
   padding: 20px;
   border-radius: 15px;
 }
@@ -213,45 +233,49 @@ textarea {
   overflow: hidden;
   overflow-y: auto;
 }
-.submit-post:hover{
+.submit-post {
+  height: 80px;
+  border: 3.5px solid white;
   background-color: black;
   color: white;
-  border: 2px solid white;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 10px;
 }
-.links:hover{
-  color:gray;
+.submit-post:hover {
+  background-color: black;
+  color: white;
+  border: 3.5px solid black;
+  background-color: #757575;
 }
-.inputImg{
-  width: 100%;
-  height: 100%;
+.links:hover {
+  color: gray;
 }
-.submit-post{
-  height: 80px;
-}
-.titles{
+
+.titles {
   font-weight: bold;
   margin: 5px;
 }
-.content{
+.content {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-items: center;
 }
-h2{
+h2 {
   font-size: 1.8em;
 }
-img{
+img {
   width: 250px;
 }
-.principal{
+.principal {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
 }
-.entrarButton{
+.entrarButton {
   border-radius: 7px;
   width: 200px;
   height: 40px;
@@ -264,18 +288,27 @@ img{
   padding: 10px 5px;
   margin: 10px 5px;
   margin: 5px;
-  transition: .7s;
-  
+  transition: 0.7s;
 }
-.entrarButton:hover{
+.entrarButton:hover {
   background-color: white;
-  color: rgb(113, 113, 113);;
+  color: rgb(113, 113, 113);
 }
-.entrarInput{
+.entrarInput {
   margin: 5px;
   width: 200px;
   height: 40px;
   padding-left: 5px;
   font-size: 20px;
   margin-bottom: 20px;
+}
+.bodyPage {
+  background-color: rgba(226, 226, 226);
+  margin-top: 100px;
+  max-width: 100vw;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

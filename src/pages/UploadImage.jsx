@@ -10,13 +10,13 @@ function UploadImage() {
     const imageRef = ref(storage, `images/${imageUpload.name}`);
 
     uploadBytes(imageRef, imageUpload).then(() => {
-      console.log(imageUpload)
+      console.log(imageUpload);
       alert("Image Uploaded");
     });
   };
-  
+
   return (
-    <div>
+    <>
       <label>Registro Fotográfico:</label>
       <input
         type="file"
@@ -25,8 +25,10 @@ function UploadImage() {
           setImageUpload(event.target.files[0]);
         }}
       />
-      <button onClick={uploadImg}>Upload Image</button>
-    </div>
+      <button className="buttonImg" onClick={uploadImg}>
+        Baixar Imagem
+      </button>
+    </>
   );
 }
 export default UploadImage;

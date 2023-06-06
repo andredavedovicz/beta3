@@ -4,7 +4,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 import { async } from "@firebase/util";
 import { useNavigate } from "react-router-dom";
-function Home({isAuth}) {
+function Home({ isAuth }) {
   const [postList, setPostList] = useState([]);
   const postsCollectionRef = collection(db, "postsexample");
   const deletePost = async (id) => {
@@ -24,35 +24,49 @@ function Home({isAuth}) {
   }, [deletePost]);
 
   return (
-    <div className="homePage">
-      {postList.map((post) => {
-        return (
-          <div className="post">
-            <div className="postHeader">
-              <div className="title">
-                <h1>{post.title}</h1>
+    <div className="bodyPage">
+      <div className="homePage">
+        {postList.map((post) => {
+          return (
+            <div className="post">
+              <div className="postHeader">
+                <div className="title">
+                  <h1>{post.title}</h1>
+                </div>
+                <div className="deletePost">
+                  {isAuth && post.author.id === auth.currentUser.uid && (
+                    <button
+                      onClick={() => {
+                        deletePost(post.id);
+                      }}
+                    >
+                      &#128465;
+                    </button>
+                  )}
+                </div>
               </div>
-              <div className="deletePost">
-                {isAuth && post.author.id === auth.currentUser.uid && (
-                  <button
-                    onClick={() => {
-                      deletePost(post.id);
-                    }}
-                  >
-                    &#128465;
-                  </button>
-                )}
+
+              <div className="content postTextContainer">
+                <div className="titles">Objeto:</div>
+                {post.objeto}
               </div>
+              <div className="content postTextContainer">
+                <div className="titles">Tipo:</div>
+                {post.tipo}
+              </div>
+              <div className="content postTextContainer">
+                <div className="titles">Status:</div>
+                {post.status}
+              </div>
+              <div className="content postTextContainer">
+                <div className="titles">Descrição:</div>
+                {post.postText}
+              </div>
+              <h3>@{post.author.name}</h3>
             </div>
-            
-            <div className="content postTextContainer"><div className="titles">Objeto:</div>{post.objeto}</div>
-            <div className="content postTextContainer"><div className="titles">Tipo:</div>{post.tipo}</div>
-            <div className="content postTextContainer"><div className="titles">Status:</div>{post.status}</div>
-            <div className="content postTextContainer"><div className="titles">Descrição:</div>{post.postText}</div>
-            <h3>@{post.author.name}</h3>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
