@@ -71,7 +71,7 @@ a {
 }
 .inputGp {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row;
   max-height: 30%;
@@ -87,11 +87,21 @@ a {
   align-items: flex-start;
 }
 .inputGp label {
-  width: 40%;
+  width: 60%;
   font-size: 18px;
   font-weight: 600;
+  
 }
 .inputGp input {
+  font-size: 18px;
+  border: none;
+  border-radius: 2px;
+  padding: 5px;
+  margin-right: 3px;
+  max-width: fit-content;
+  width: 60%;
+}
+.inputGp select {
   font-size: 18px;
   border: none;
   border-radius: 2px;
@@ -103,6 +113,7 @@ a {
 .inputGp2 label {
   font-weight: 600;
   font-size: 18px;
+  
 }
 .inputImg {
   width: 99%;
@@ -112,7 +123,9 @@ a {
   margin-left: 0;
   background-color: #4c4d54;
   color: white;
+  cursor: pointer;
 }
+
 
 .inputGp textarea {
   height: 150px;
@@ -131,6 +144,12 @@ a {
   font-size: 18px;
   border: 2px solid rgb(21, 24, 21);
   border-radius: 5px;
+}
+.buttonImg:hover {
+  background-color: rgb(21, 24, 21);
+  border: 2px solid #4c4d54;
+  cursor: pointer;
+  
 }
 .loginPage {
   margin-top: 80px;

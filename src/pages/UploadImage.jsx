@@ -10,8 +10,7 @@ function UploadImage() {
     const imageRef = ref(storage, `images/${imageUpload.name}`);
 
     uploadBytes(imageRef, imageUpload).then(() => {
-      console.log(imageUpload);
-      alert("Image Uploaded");
+      alert("Imagem Enviada");
     });
   };
 

@@ -11,8 +11,8 @@ function CreatePost({ isAuth }) {
   const [title, setTitle] = useState("");
   const [objeto, setObjeto] = useState("");
   const [postText, setPostText] = useState("");
-  const [tipo, setTipo] = useState("");
-  const [status, setStatus] = useState("");
+  const [tipo, setTipo] = useState("Manutenção");
+  const [status, setStatus] = useState("Interrompe a atividade");
 
   const postsCollectionRef = collection(db, "postsexample");
 
@@ -65,17 +65,18 @@ function CreatePost({ isAuth }) {
           </div>
           <div className="inputGp">
             <label>Tipo de Manutenção:</label>
-            <input
-              placeholder="Tipo..."
-              onChange={(event) => setTipo(event.target.value)}
-            ></input>
+            <select onChange={(event) => setTipo(event.target.value)}>
+              <option value="Manutenção">Manutenção</option>
+              <option value="Melhoria">Melhoria</option>
+              <option value="Investimento">Investimento</option>
+            </select>
           </div>
           <div className="inputGp">
             <label>Manutenção interrompe a atividade? </label>
-            <input
-              placeholder="Não?..."
-              onChange={(event) => setStatus(event.target.value)}
-            ></input>
+            <select onChange={(event) => setStatus(event.target.value)}>
+              <option value="Interrompe a atividade">Sim</option>
+              <option value="Não Interrompe a atividade">Não</option>
+            </select>
           </div>
           <button className="submit-post" onClick={createPost}>
             Enviar
