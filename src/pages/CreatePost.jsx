@@ -25,7 +25,7 @@ function CreatePost({ isAuth }) {
       postText,
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
     });
-    navigate("/");
+    navigate("/home");
   };
   useEffect(() => {
     if (!isAuth) {
