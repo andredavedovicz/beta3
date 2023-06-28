@@ -4,8 +4,9 @@ import { addDoc, collection } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import UploadImage from "./UploadImage";
-
+import {storage} from "../firebase-config"
+import { ref, uploadBytes,listAll, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 function CreatePost({ isAuth }) {
   let navigate = useNavigate();
   const [title, setTitle] = useState("");
@@ -13,9 +14,12 @@ function CreatePost({ isAuth }) {
   const [postText, setPostText] = useState("");
   const [tipo, setTipo] = useState("Manutenção");
   const [status, setStatus] = useState("Interrompe a atividade");
+  const [image,setImage] = useState("");
 
   const postsCollectionRef = collection(db, "postsexample");
 
+  const [imageUpload,setImageUpload] = useState(null)
+  const [imageList,setImageList]= useState([])
   const createPost = async () => {
     await addDoc(postsCollectionRef, {
       title,
@@ -24,6 +28,7 @@ function CreatePost({ isAuth }) {
       status,
       postText,
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
+      image
     });
     navigate("/home");
   };
@@ -32,7 +37,28 @@ function CreatePost({ isAuth }) {
       navigate("/login");
     }
   }, []);
-
+  const imageListRef = ref(storage,"/images")
+  const uploadImage = () =>{
+      if(imageUpload == null) return;
+      const imageRef = ref(storage,`imagesexample/${imageUpload.name + v4()}`)
+      uploadBytes(imageRef,imageUpload).then((snapshot)=>{
+        alert("Image Uploaded!")
+        getDownloadURL(snapshot.ref).then((url)=>{
+          setImageList((prev)=>[...prev,url]);
+          setImage(url)
+        });
+      });
+  }
+  useEffect(() => {
+    listAll(imageListRef).then((response)=>{
+      response.items.forEach((item)=>{
+        getDownloadURL(item).then((url)=>{
+          setImageList((prev)=>[...prev,url]);
+        })
+      })
+    })
+  }, [])
+  
   return (
     <div className="bodyPage">
       <div className="createPostPage">
@@ -52,7 +78,9 @@ function CreatePost({ isAuth }) {
             ></input>
           </div>
           <div className="inputGp2">
-            <UploadImage />
+            <label>Registro Fotográfico:</label>
+            <input type="file" className="inputImg" onChange={(e)=>{setImageUpload(e.target.files[0])}}/>
+            <button onClick={uploadImage} className="buttonImg">Baixar Imagem</button>
           </div>
 
           <div className="inputGp">
@@ -83,6 +111,7 @@ function CreatePost({ isAuth }) {
           </button>
         </div>
       </div>
+      
     </div>
   );
 }

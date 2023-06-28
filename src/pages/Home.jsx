@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { deleteDoc, getDocs, doc } from "firebase/firestore";
-import { addDoc, collection } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
-import { async } from "@firebase/util";
 import { useNavigate } from "react-router-dom";
+
 function Home({ isAuth }) {
   const [postList, setPostList] = useState([]);
   const postsCollectionRef = collection(db, "postsexample");
@@ -62,6 +62,12 @@ function Home({ isAuth }) {
                 <div className="titles">Descrição:</div>
                 {post.postText}
               </div>
+              {post.image && (
+                <a href={post.image} target="_blank">
+                  <img className="imagemOs" src={post.image} alt="imagemOs" />
+                </a>
+              )}
+
               <h3>@{post.author.name}</h3>
             </div>
           );
