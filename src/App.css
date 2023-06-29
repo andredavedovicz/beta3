@@ -60,7 +60,8 @@ a {
 }
 
 .inputGp,
-.inputGp2 {
+.inputGp2,
+.inputGpValid {
   width: 99,99%;
   justify-content: space-between;
   background-color: #757575;
@@ -69,7 +70,7 @@ a {
   border-radius: 8px;
   padding: 5px;
 }
-.inputGp {
+.inputGp,.inputGpInvalid {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -86,13 +87,13 @@ a {
   flex-direction: column;
   align-items: flex-start;
 }
-.inputGp label {
+.inputGp label,.inputGpInvalid label {
   width: 60%;
   font-size: 18px;
   font-weight: 600;
   
 }
-.inputGp input {
+.inputGp input,.inputGpInvalid input {
   font-size: 18px;
   border: none;
   border-radius: 2px;
@@ -101,7 +102,7 @@ a {
   max-width: fit-content;
   width: 60%;
 }
-.inputGp select {
+.inputGp select,.inputGpInvalid select {
   font-size: 18px;
   border: none;
   border-radius: 2px;
@@ -127,7 +128,7 @@ a {
 }
 
 
-.inputGp textarea {
+.inputGp textarea,.inputGpInvalid textarea {
   height: 150px;
   font-size: 20px;
   border: none;
@@ -334,4 +335,14 @@ img {
 .imagemOs{
   width: 100px;
   max-height: 300px;
+}
+.baixarImg{
+  flex-direction: row;
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.baixarImg div{
+  font-size: 30px;
 }
