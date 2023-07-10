@@ -343,6 +343,9 @@ img {
   align-items: center;
   justify-content: center;
 }
-.baixarImg div{
+.icon{
   font-size: 30px;
+}
+.downloadNumber{
+  font-size: 20px;
 }

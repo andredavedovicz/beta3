@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection,getDocs } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -14,12 +14,14 @@ function CreatePost({ isAuth }) {
   const [postText, setPostText] = useState("");
   const [tipo, setTipo] = useState("Manutenção");
   const [status, setStatus] = useState("Não Interrompe a atividade");
-  const [image, setImage] = useState("");
-
+  const [image, setImage] = useState([]);
+  const [imageListUrl,setImageListUrl]=useState([]);
+  const [downloadNumber,setDownloadNumber] = useState(0);
   const postsCollectionRef = collection(db, "postsexample");
-
+  const [postList, setPostList] = useState([]);
   const [imageUpload, setImageUpload] = useState(null);
   const [imageList, setImageList] = useState([]);
+  const [postNumber,setPostNumber] = useState("");
   const createPost = async () => {
     {title == ""?setTitleColor("red"):setTitleColor("green")}
     {objeto == ""?setObjetoColor("red"):setObjetoColor("green")}
@@ -27,6 +29,7 @@ function CreatePost({ isAuth }) {
     {postText == ""?setPostTextColor("red"):setPostTextColor("green")}
     
     if(title !== "" && objeto !== "" && postText !== "" && image !== ""){
+      
       await addDoc(postsCollectionRef, {
       title,
       objeto,
@@ -35,6 +38,8 @@ function CreatePost({ isAuth }) {
       postText,
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
       image,
+      imageListUrl,
+      postNumber
     });
     navigate("/home");
     }
@@ -42,10 +47,19 @@ function CreatePost({ isAuth }) {
       alert("Formulário Inválido!")
     }
   };
+  const settingPostNumber = ()=>{
+    setPostNumber(postList.length+1)
+    
+  }
   useEffect(() => {
     if (!isAuth) {
       navigate("/login");
     }
+    const getPosts = async () => {
+      const data = await getDocs(postsCollectionRef);
+      setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getPosts();
   }, []);
   const imageListRef = ref(storage, "/images");
   const uploadImage = () => {
@@ -56,20 +70,16 @@ function CreatePost({ isAuth }) {
       getDownloadURL(snapshot.ref).then((url) => {
         setImageList((prev) => [...prev, url]);
         setImage(url);
+        setImageListUrl([...imageListUrl,url])
+        console.log(imageListUrl)
         setImageColor("green")
+        setDownloadNumber(downloadNumber+1)
+        settingPostNumber()
       });
     });
     
   };
-  useEffect(() => {
-    listAll(imageListRef).then((response) => {
-      response.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
-          setImageList((prev) => [...prev, url]);
-        });
-      });
-    });
-  }, []);
+  
   const [titleColor, setTitleColor] = useState("inputGp");
   const [objetoColor, setObjetoColor] = useState("inputGp");
   const [postTextColor, setPostTextColor] = useState("inputGp");
@@ -108,10 +118,11 @@ function CreatePost({ isAuth }) {
             </button>
             { imageColor == "red"?(
               image == ""?
-            <div>&#10060;</div>:(
-              <div>&#10004;</div>
+            <div className="icon">&#10060; {downloadNumber}</div>:(
+              <div className="icon">&#10004;</div>
             )
             ):("")}
+            <div className="downloadNumber">({downloadNumber})Imagens Salvas</div>
             </div>
             
           </div>

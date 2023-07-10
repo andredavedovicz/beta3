@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Home({ isAuth }) {
   const [postList, setPostList] = useState([]);
   const postsCollectionRef = collection(db, "postsexample");
+  const postsCollectionRefHistoric = collection(db, "postshistoric");
   const deletePost = async (id) => {
     const postDoc = doc(db, "postsexample", id);
     await deleteDoc(postDoc);
@@ -30,9 +31,12 @@ function Home({ isAuth }) {
           return (
             <div className="post">
               <div className="postHeader">
+                
                 <div className="title">
-                  <h1>{post.title}</h1>
+                  <h1>OS#{post.postNumber}</h1>
+                  
                 </div>
+                
                 <div className="deletePost">
                   {isAuth && post.author.id === auth.currentUser.uid && (
                     <button
@@ -45,8 +49,12 @@ function Home({ isAuth }) {
                   )}
                 </div>
               </div>
-
               <div className="content postTextContainer">
+                <div className="titles">Local:</div>
+                {post.title}
+              </div>            
+              <div className="content postTextContainer">
+              
                 <div className="titles">Objeto:</div>
                 {post.objeto}
               </div>
@@ -62,12 +70,14 @@ function Home({ isAuth }) {
                 <div className="titles">Descrição:</div>
                 {post.postText}
               </div>
-              {post.image && (
-                <a href={post.image} target="_blank">
-                  <img className="imagemOs" src={post.image} alt="imagemOs" />
-                </a>
-              )}
-
+              
+              {post.imageListUrl?.map((image) => {
+                return (
+                  <a href={image} target="_blank">
+                    <img className="imagemOs" src={image} alt={image} />
+                  </a>
+                );
+              })}
               <h3>@{post.author.name}</h3>
             </div>
           );
