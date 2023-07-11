@@ -40,7 +40,7 @@ function App() {
             <Link className="links" to="/createpost">
               Criar OS
             </Link>
-            <button className="links" onClick={signUserOut}>
+            <button className="sair" onClick={signUserOut}>
               Sair
             </button>
           </>
