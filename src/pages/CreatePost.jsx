@@ -18,6 +18,7 @@ function CreatePost({ isAuth }) {
   const [imageListUrl,setImageListUrl]=useState([]);
   const [downloadNumber,setDownloadNumber] = useState(0);
   const postsCollectionRef = collection(db, "postsexample");
+  const postsCollectionRefHistoric = collection(db, "postsexamplehistoric");
   const [postList, setPostList] = useState([]);
   const [imageUpload, setImageUpload] = useState(null);
   const [imageList, setImageList] = useState([]);
@@ -40,7 +41,20 @@ function CreatePost({ isAuth }) {
       image,
       imageListUrl,
       postNumber
-    });
+    }).then(()=>{
+      addDoc(postsCollectionRefHistoric, {
+      title,
+      objeto,
+      tipo,
+      status,
+      postText,
+      author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
+      image,
+      imageListUrl,
+      postNumber
+    })
+    
+    })
     navigate("/home");
     }
     else{
@@ -56,12 +70,11 @@ function CreatePost({ isAuth }) {
       navigate("/login");
     }
     const getPosts = async () => {
-      const data = await getDocs(postsCollectionRef);
+      const data = await getDocs(postsCollectionRefHistoric);
       setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getPosts();
   }, []);
-  const imageListRef = ref(storage, "/images");
   const uploadImage = () => {
     if (imageUpload == null) return;
     const imageRef = ref(storage, `imagesexample/${imageUpload.name + v4()}`);
