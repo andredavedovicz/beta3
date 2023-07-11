@@ -62,7 +62,7 @@ a {
 .inputGp,
 .inputGp2,
 .inputGpValid {
-  width: 99,99%;
+  width: 99, 99%;
   justify-content: space-between;
   background-color: #757575;
   margin: 10px;
@@ -70,7 +70,8 @@ a {
   border-radius: 8px;
   padding: 5px;
 }
-.inputGp,.inputGpInvalid {
+.inputGp,
+.inputGpInvalid {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,13 +88,14 @@ a {
   flex-direction: column;
   align-items: flex-start;
 }
-.inputGp label,.inputGpInvalid label {
+.inputGp label,
+.inputGpInvalid label {
   width: 60%;
   font-size: 18px;
   font-weight: 600;
-  
 }
-.inputGp input,.inputGpInvalid input {
+.inputGp input,
+.inputGpInvalid input {
   font-size: 18px;
   border: none;
   border-radius: 2px;
@@ -102,7 +104,8 @@ a {
   max-width: fit-content;
   width: 60%;
 }
-.inputGp select,.inputGpInvalid select {
+.inputGp select,
+.inputGpInvalid select {
   font-size: 18px;
   border: none;
   border-radius: 2px;
@@ -114,7 +117,6 @@ a {
 .inputGp2 label {
   font-weight: 600;
   font-size: 18px;
-  
 }
 .inputImg {
   width: 99%;
@@ -127,8 +129,8 @@ a {
   cursor: pointer;
 }
 
-
-.inputGp textarea,.inputGpInvalid textarea {
+.inputGp textarea,
+.inputGpInvalid textarea {
   height: 150px;
   font-size: 20px;
   border: none;
@@ -150,7 +152,6 @@ a {
   background-color: rgb(21, 24, 21);
   border: 2px solid #4c4d54;
   cursor: pointer;
-  
 }
 .loginPage {
   margin-top: 80px;
@@ -210,7 +211,7 @@ a {
   width: 90vw;
 }
 
-.homePage .post {
+.homePage .post{
   width: 90vw;
   height: auto;
   max-height: 600px;
@@ -332,20 +333,38 @@ img {
   flex-direction: column;
   align-items: center;
 }
-.imagemOs{
+.imagemOs {
   width: 100px;
   max-height: 300px;
 }
-.baixarImg{
+.baixarImg {
   flex-direction: row;
   flex-wrap: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.icon{
+.icon {
   font-size: 30px;
 }
-.downloadNumber{
+.downloadNumber {
   font-size: 20px;
+}
+@media (max-width: 450px) {
+  .post {
+    max-width:85vw;
+    height: auto;
+    position: absolute;
+    left: 5px;
+  }
+  .deletePost button {
+    font-size: 20px;
+  }
+  .title h1{
+    color: green;
+  }
+  .imagemOs {
+    width: 75px;
+    max-height: 225px;
+  }
 }
