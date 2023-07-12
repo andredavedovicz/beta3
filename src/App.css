@@ -229,7 +229,7 @@ a {
 }
 
 .homePage .post{
-  width: 90vw;
+  width: 90%;
   height: auto;
   max-height: 600px;
   background-color: rgba(226, 226, 226);
