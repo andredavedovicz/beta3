@@ -378,7 +378,7 @@ img {
 .downloadNumber {
   font-size: 20px;
 }
-@media (max-width: 450px) {
+@media (max-width: 595px) {
   .post {
     max-width:85vw;
     height: auto;
@@ -396,5 +396,9 @@ img {
     background: none;
     font-size: 30px;
     cursor: pointer;
+  }
+  .imagemOsCreate{
+    width: 100%;
+    max-height: 50px;
   }
 }
