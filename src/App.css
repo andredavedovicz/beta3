@@ -356,8 +356,8 @@ img {
   max-height: 300px;
 }
 .imagemOsCreate{
-  width: 100%;
-  max-height: 100px;
+  width: 50px;
+  max-height: 150px;
 }
 .imagensOsCreate{
   display: flex;
@@ -396,9 +396,5 @@ img {
     background: none;
     font-size: 30px;
     cursor: pointer;
-  }
-  .imagemOsCreate{
-    width: 75%;
-    max-height: 75px;
   }
 }
