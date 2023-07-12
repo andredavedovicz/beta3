@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { addDoc, collection,getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -15,56 +15,66 @@ function CreatePost({ isAuth }) {
   const [tipo, setTipo] = useState("Manutenção");
   const [status, setStatus] = useState("Não Interrompe a atividade");
   const [image, setImage] = useState([]);
-  const [imageListUrl,setImageListUrl]=useState([]);
-  const [downloadNumber,setDownloadNumber] = useState(0);
+  const [imageListUrl, setImageListUrl] = useState([]);
+  const [downloadNumber, setDownloadNumber] = useState(0);
   const postsCollectionRef = collection(db, "postsexample");
   const postsCollectionRefHistoric = collection(db, "postsexamplehistoric");
   const [postList, setPostList] = useState([]);
-  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUpload, setImageUpload] = useState([]);
   const [imageList, setImageList] = useState([]);
-  const [postNumber,setPostNumber] = useState("");
+  const [postNumber, setPostNumber] = useState("");
   const createPost = async () => {
-    {title == ""?setTitleColor("red"):setTitleColor("green")}
-    {objeto == ""?setObjetoColor("red"):setObjetoColor("green")}
-    {image == ""?setImageColor("red"):setImageColor("green")}
-    {postText == ""?setPostTextColor("red"):setPostTextColor("green")}
-    
-    if(title !== "" && objeto !== "" && postText !== "" && image !== ""){
-      
-      await addDoc(postsCollectionRef, {
-      title,
-      objeto,
-      tipo,
-      status,
-      postText,
-      author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
-      image,
-      imageListUrl,
-      postNumber
-    }).then(()=>{
-      addDoc(postsCollectionRefHistoric, {
-      title,
-      objeto,
-      tipo,
-      status,
-      postText,
-      author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
-      image,
-      imageListUrl,
-      postNumber
-    })
-    
-    })
-    navigate("/home");
+    {
+      title == "" ? setTitleColor("red") : setTitleColor("green");
     }
-    else{
-      alert("Formulário Inválido!")
+    {
+      objeto == "" ? setObjetoColor("red") : setObjetoColor("green");
+    }
+    {
+      image == "" ? setImageColor("red") : setImageColor("green");
+    }
+    {
+      postText == "" ? setPostTextColor("red") : setPostTextColor("green");
+    }
+
+    if (title !== "" && objeto !== "" && postText !== "" && image !== "") {
+      await addDoc(postsCollectionRef, {
+        title,
+        objeto,
+        tipo,
+        status,
+        postText,
+        author: {
+          name: auth.currentUser.displayName,
+          id: auth.currentUser.uid,
+        },
+        image,
+        imageListUrl,
+        postNumber,
+      }).then(() => {
+        addDoc(postsCollectionRefHistoric, {
+          title,
+          objeto,
+          tipo,
+          status,
+          postText,
+          author: {
+            name: auth.currentUser.displayName,
+            id: auth.currentUser.uid,
+          },
+          image,
+          imageListUrl,
+          postNumber,
+        });
+      });
+      navigate("/home");
+    } else {
+      alert("Formulário Inválido!");
     }
   };
-  const settingPostNumber = ()=>{
-    setPostNumber(postList.length+1)
-    
-  }
+  const settingPostNumber = () => {
+    setPostNumber(postList.length + 1);
+  };
   useEffect(() => {
     if (!isAuth) {
       navigate("/login");
@@ -76,71 +86,102 @@ function CreatePost({ isAuth }) {
     getPosts();
   }, []);
   const uploadImage = () => {
+    console.log(imageUpload);
     if (imageUpload == null) return;
-    const imageRef = ref(storage, `imagesexample/${imageUpload.name + v4()}`);
-    uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      alert("Image Uploaded!");
-      getDownloadURL(snapshot.ref).then((url) => {
-        setImageList((prev) => [...prev, url]);
-        setImage(url);
-        setImageListUrl([...imageListUrl,url])
-        console.log(imageListUrl)
-        setImageColor("green")
-        setDownloadNumber(downloadNumber+1)
-        settingPostNumber()
-      });
-    });
-    
+    for (let File of imageUpload) {
+      console.log(File);
+      const forEachImage = (imagem) => {
+        const imageRef = ref(storage, `imagesexample/${imagem.name + v4()}`);
+        return uploadBytes(imageRef, imagem).then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((url) => {
+            setImageList((prev) => [...prev, url]);
+            setImage(url);
+            setImageListUrl(oldArray=>[...oldArray,url]);
+            
+            setImageColor("green");
+            setDownloadNumber(downloadNumber + 1);
+            settingPostNumber();
+            console.log(imagem.name);
+            console.log(url)
+            console.log(imageListUrl);
+          });
+        });
+      };
+      forEachImage(File)
+    }
   };
-  
+
   const [titleColor, setTitleColor] = useState("inputGp");
   const [objetoColor, setObjetoColor] = useState("inputGp");
   const [postTextColor, setPostTextColor] = useState("inputGp");
   const [imageColor, setImageColor] = useState("inputGp");
-  
+
   return (
     <div className="bodyPage">
       <div className="createPostPage">
         <div className="cpContainer">
-          <div className="inputGp" style={{border:`3px solid ${titleColor}`}}>
+          <div
+            className="inputGp"
+            style={{ border: `3px solid ${titleColor}` }}
+          >
             <label>Local:</label>
             <input
               placeholder="Local..."
               onChange={(event) => setTitle(event.target.value)}
             ></input>
           </div>
-          <div className="inputGp" style={{border:`3px solid ${objetoColor}`}}>
+          <div
+            className="inputGp"
+            style={{ border: `3px solid ${objetoColor}` }}
+          >
             <label>Objeto da Manutenção:</label>
             <input
               placeholder="Objeto..."
               onChange={(event) => setObjeto(event.target.value)}
             ></input>
           </div>
-          <div className="inputGp2" style={{border:`3px solid ${imageColor}`}}>
+          <div
+            className="inputGp2"
+            style={{ border: `3px solid ${imageColor}` }}
+          >
             <label>Registro Fotográfico:</label>
             <input
               type="file"
               className="inputImg"
               onChange={(e) => {
-                setImageUpload(e.target.files[0]);
+                setImageUpload(e.target.files);
+
+                //ate aquiiiiiiiiiiiiiiiisaçfjapsfaw
               }}
+              multiple
             />
             <div className="baixarImg">
-              <button onClick={uploadImage} className="buttonImg" style={{backgroundColor:`${imageColor}`}}>
-              Baixar Imagem
-            </button>
-            { imageColor == "red"?(
-              image == ""?
-            <div className="icon">&#10060; {downloadNumber}</div>:(
-              <div className="icon">&#10004;</div>
-            )
-            ):("")}
-            <div className="downloadNumber">({downloadNumber})Imagens Salvas</div>
+              <button
+                onClick={uploadImage}
+                className="buttonImg"
+                style={{ backgroundColor: `${imageColor}` }}
+              >
+                Baixar Imagem
+              </button>
+              {imageColor == "red" ? (
+                image == "" ? (
+                  <div className="icon">&#10060; {downloadNumber}</div>
+                ) : (
+                  <div className="icon">&#10004;</div>
+                )
+              ) : (
+                ""
+              )}
+              <div className="downloadNumber">
+                ({downloadNumber})Imagens Salvas
+              </div>
             </div>
-            
           </div>
 
-          <div className="inputGp" style={{border:`3px solid ${postTextColor}`}}>
+          <div
+            className="inputGp"
+            style={{ border: `3px solid ${postTextColor}` }}
+          >
             <label>Descrição:</label>
             <textarea
               placeholder="Descrição..."
