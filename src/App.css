@@ -369,6 +369,7 @@ img {
   .post {
     max-width:85vw;
     height: auto;
+    margin-left: 0px;
   }
   .deletePost button {
     font-size: 20px;
@@ -376,5 +377,11 @@ img {
   .imagemOs {
     width: 75px;
     max-height: 225px;
+  }
+  .deletePost button {
+    border: none;
+    background: none;
+    font-size: 30px;
+    cursor: pointer;
   }
 }
