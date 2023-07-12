@@ -96,18 +96,18 @@ function CreatePost({ isAuth }) {
           getDownloadURL(snapshot.ref).then((url) => {
             setImageList((prev) => [...prev, url]);
             setImage(url);
-            setImageListUrl(oldArray=>[...oldArray,url]);
-            
+            setImageListUrl((oldArray) => [...oldArray, url]);
+
             setImageColor("green");
-            setDownloadNumber(downloadNumber + 1);
+            setDownloadNumber(imageListUrl.length);
             settingPostNumber();
             console.log(imagem.name);
-            console.log(url)
+            console.log(url);
             console.log(imageListUrl);
           });
         });
       };
-      forEachImage(File)
+      forEachImage(File);
     }
   };
 
@@ -150,8 +150,6 @@ function CreatePost({ isAuth }) {
               className="inputImg"
               onChange={(e) => {
                 setImageUpload(e.target.files);
-
-                //ate aquiiiiiiiiiiiiiiiisaçfjapsfaw
               }}
               multiple
             />
@@ -175,6 +173,15 @@ function CreatePost({ isAuth }) {
               <div className="downloadNumber">
                 ({downloadNumber})Imagens Salvas
               </div>
+            </div>
+            <div className="imagensOsCreate">
+              {imageListUrl?.map((image) => {
+                return (
+                  <a href={image} target="_blank">
+                    <img className="imagemOsCreate" src={image} alt={image} />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
