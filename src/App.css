@@ -369,8 +369,6 @@ img {
   .post {
     max-width:85vw;
     height: auto;
-    position: absolute;
-    left: 5px;
   }
   .deletePost button {
     font-size: 20px;
