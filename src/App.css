@@ -398,7 +398,7 @@ img {
     cursor: pointer;
   }
   .imagemOsCreate{
-    width: 100%;
-    max-height: 50px;
+    width: 75%;
+    max-height: 75px;
   }
 }
