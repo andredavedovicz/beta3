@@ -84,7 +84,10 @@ function CreatePost({ isAuth }) {
       setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getPosts();
-  }, []);
+    if (downloadNumber != null) {
+      setDownloadNumber(imageListUrl.length);
+    }
+  }, [imageListUrl]);
   const uploadImage = () => {
     console.log(imageUpload);
     if (imageUpload == null) return;
@@ -99,7 +102,7 @@ function CreatePost({ isAuth }) {
             setImageListUrl((oldArray) => [...oldArray, url]);
 
             setImageColor("green");
-            setDownloadNumber(imageListUrl.length);
+
             settingPostNumber();
             console.log(imagem.name);
             console.log(url);
@@ -170,6 +173,7 @@ function CreatePost({ isAuth }) {
               ) : (
                 ""
               )}
+
               <div className="downloadNumber">
                 ({downloadNumber})Imagens Salvas
               </div>
