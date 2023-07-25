@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { storage } from "../firebase-config";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
-function CreatePost({ isAuth }) {
+function CreatePost({ isAuth }, key) {
   let navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [objeto, setObjeto] = useState("");
@@ -23,6 +23,7 @@ function CreatePost({ isAuth }) {
   const [imageUpload, setImageUpload] = useState([]);
   const [imageList, setImageList] = useState([]);
   const [postNumber, setPostNumber] = useState("");
+  const [dateCreated, setDateCreated] = useState("");
   const createPost = async () => {
     {
       title == "" ? setTitleColor("red") : setTitleColor("green");
@@ -51,6 +52,7 @@ function CreatePost({ isAuth }) {
         image,
         imageListUrl,
         postNumber,
+        dateCreated,
       }).then(() => {
         addDoc(postsCollectionRefHistoric, {
           title,
@@ -65,6 +67,7 @@ function CreatePost({ isAuth }) {
           image,
           imageListUrl,
           postNumber,
+          dateCreated,
         });
       });
       navigate("/home");
@@ -92,6 +95,7 @@ function CreatePost({ isAuth }) {
     console.log(imageUpload);
     if (imageUpload == null) return;
     for (let File of imageUpload) {
+      console.log(imageUpload);
       console.log(File);
       const forEachImage = (imagem) => {
         const imageRef = ref(storage, `imagesexample/${imagem.name + v4()}`);
@@ -107,6 +111,9 @@ function CreatePost({ isAuth }) {
             console.log(imagem.name);
             console.log(url);
             console.log(imageListUrl);
+            const dateString = `${File.lastModifiedDate}`
+            setDateCreated(dateString);
+            console.log(date);
           });
         });
       };

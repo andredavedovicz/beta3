@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { deleteDoc, getDocs, doc } from "firebase/firestore";
-import { collection } from "firebase/firestore";
+import { collection,query, orderBy} from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 
 function Home({ isAuth }) {
   const [postList, setPostList] = useState([]);
   const postsCollectionRef = collection(db, "postsexample");
-  const postsCollectionRefHistoric = collection(db, "postshistoric");
   const deletePost = async (id) => {
     const postDoc = doc(db, "postsexample", id);
     await deleteDoc(postDoc);
@@ -18,18 +17,19 @@ function Home({ isAuth }) {
       navigate("/login");
     }
     const getPosts = async () => {
-      const data = await getDocs(postsCollectionRef);
+      const data = await getDocs(OrderPostList);
       setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getPosts();
   }, [deletePost]);
+  const OrderPostList = query(postsCollectionRef,orderBy("postNumber","asc"))
 
   return (
     <div className="bodyPage">
       <div className="homePage">
         {postList.map((post) => {
           return (
-            <div className="post">
+            <div key={post.postNumber} className="post">
               <div className="postHeader">
                 
                 <div className="title">
@@ -38,21 +38,27 @@ function Home({ isAuth }) {
                 </div>
                 
                 <div className="deletePost">
-                  {isAuth && post.author.id === auth.currentUser.uid && (
+                  {isAuth && "Gy9XDtrBOfb09Y9RujCl0jON0jE2" === auth.currentUser.uid && (
                     <button
                       onClick={() => {
                         deletePost(post.id);
+                        console.log(post.date)
                       }}
                     >
                       &#128465;
                     </button>
                   )}
-                </div>
+                </div> 
+              </div>
+              <div className="content postTextContainer">
+                <div className="titles">Data:</div>
+                {post.date}
               </div>
               <div className="content postTextContainer">
                 <div className="titles">Local:</div>
                 {post.title}
               </div>            
+              
               <div className="content postTextContainer">
               
                 <div className="titles">Objeto:</div>
