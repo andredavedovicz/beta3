@@ -52,7 +52,7 @@ function Home({ isAuth }) {
               </div>
               <div className="content postTextContainer">
                 <div className="titles">Data:</div>
-                {post.date}
+                {post.dateCreated}
               </div>
               <div className="content postTextContainer">
                 <div className="titles">Local:</div>
