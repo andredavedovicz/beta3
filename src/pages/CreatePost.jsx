@@ -92,14 +92,7 @@ function CreatePost({ isAuth }, key) {
     }
   }, [imageListUrl]);
 
-  const getTime = () => {
-    /*const data = new Date;
-    const dataEN = data.toISOString();
-    console.log(dataEN);
-    const dataPT = toISOFormat(data);
-    setDateCreated(dataPT);
-    console.log(dateCreated);*/
-  };
+  
 
   // Função para converter a data
   const convertDateFormat = (inputDate) => {
@@ -114,11 +107,8 @@ function CreatePost({ isAuth }, key) {
     return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
   };
   const uploadImage = () => {
-    console.log(imageUpload);
     if (imageUpload == null) return;
     for (let File of imageUpload) {
-      console.log(imageUpload);
-      console.log(File);
       const forEachImage = (imagem) => {
         const imageRef = ref(storage, `imagesexample/${imagem.name + v4()}`);
         return uploadBytes(imageRef, imagem).then((snapshot) => {
@@ -130,9 +120,6 @@ function CreatePost({ isAuth }, key) {
             setImageColor("green");
 
             settingPostNumber();
-            console.log(imagem.name);
-            console.log(url);
-            console.log(imageListUrl);
             const currentDate = new Date().toISOString();
             const formatted = convertDateFormat(currentDate);
             setDateCreated(formatted);

@@ -42,7 +42,6 @@ function Home({ isAuth }) {
                     <button
                       onClick={() => {
                         deletePost(post.id);
-                        console.log(post.date)
                       }}
                     >
                       &#128465;
