@@ -91,6 +91,28 @@ function CreatePost({ isAuth }, key) {
       setDownloadNumber(imageListUrl.length);
     }
   }, [imageListUrl]);
+
+  const getTime = () => {
+    /*const data = new Date;
+    const dataEN = data.toISOString();
+    console.log(dataEN);
+    const dataPT = toISOFormat(data);
+    setDateCreated(dataPT);
+    console.log(dateCreated);*/
+  };
+
+  // Função para converter a data
+  const convertDateFormat = (inputDate) => {
+    const date = new Date(inputDate);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+
+    return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+  };
   const uploadImage = () => {
     console.log(imageUpload);
     if (imageUpload == null) return;
@@ -111,9 +133,9 @@ function CreatePost({ isAuth }, key) {
             console.log(imagem.name);
             console.log(url);
             console.log(imageListUrl);
-            const dateString = `${File.lastModifiedDate}`
-            setDateCreated(dateString);
-            console.log(date);
+            const currentDate = new Date().toISOString();
+            const formatted = convertDateFormat(currentDate);
+            setDateCreated(formatted);
           });
         });
       };
