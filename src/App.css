@@ -334,12 +334,10 @@ img {
   color: rgb(113, 113, 113);
 }
 .entrarInput {
-  margin: 5px;
   width: 200px;
   height: 40px;
   padding-left: 5px;
   font-size: 20px;
-  margin-bottom: 20px;
 }
 .bodyPage {
   background-color: rgba(226, 226, 226);
@@ -397,4 +395,11 @@ img {
     font-size: 30px;
     cursor: pointer;
   }
+}
+.badPassword{
+  color:red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }

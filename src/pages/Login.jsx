@@ -14,16 +14,18 @@ function Login({ setIsAuth }) {
   };
   const [password, setPassword] = useState();
   const [valueBlackOut, setValueBlackOut] = useState(true);
+  const [alertPassword, setAlertPassword] = useState(true);
   const blackOut = () => {
-    let truePassword = "smobili@2023";
-    
+    let truePassword = "maple@2023";
+
     if (password === truePassword) {
-      setValueBlackOut(false)
+      setValueBlackOut(false);
+      setAlertPassword(true);
     }
     if (password !== truePassword) {
-      setValueBlackOut(true)
+      setValueBlackOut(true);
+      setAlertPassword(false);
     }
-    
   };
   return (
     <div className="loginPage">
@@ -36,15 +38,25 @@ function Login({ setIsAuth }) {
       </>
       {valueBlackOut ? (
         <>
-          <input
-            className="entrarInput"
-            type="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <button onClick={blackOut} className="entrarButton">Permitir Acesso</button>
+          <div className="inputPassword">
+            <input
+              className="entrarInput"
+              type="text"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+            {!alertPassword ? (
+              <div className="badPassword">Senha está Incorreta!</div>
+            ) : (
+              <></>
+            )}
+          </div>
+
+          <button onClick={blackOut} className="entrarButton">
+            Permitir Acesso
+          </button>
         </>
       ) : (
         <>
