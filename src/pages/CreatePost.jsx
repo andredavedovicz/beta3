@@ -24,6 +24,9 @@ function CreatePost({ isAuth }, key) {
   const [imageList, setImageList] = useState([]);
   const [postNumber, setPostNumber] = useState("");
   const [dateCreated, setDateCreated] = useState("");
+
+  //Função para criar a OS e mandar para o firebase
+
   const createPost = async () => {
     {
       title == "" ? setTitleColor("red") : setTitleColor("green");
@@ -75,6 +78,7 @@ function CreatePost({ isAuth }, key) {
       alert("Formulário Inválido!");
     }
   };
+  //Funão para setar número da OS
   const settingPostNumber = () => {
     setPostNumber(postList.length + 1);
   };
@@ -106,6 +110,7 @@ function CreatePost({ isAuth }, key) {
 
     return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
   };
+  // Função para fazer o Upload da imagem
   const uploadImage = () => {
     if (imageUpload == null) return;
     for (let File of imageUpload) {
@@ -129,7 +134,7 @@ function CreatePost({ isAuth }, key) {
       forEachImage(File);
     }
   };
-
+  //Trocar as cores dos inputs para validação do formulário
   const [titleColor, setTitleColor] = useState("inputGp");
   const [objetoColor, setObjetoColor] = useState("inputGp");
   const [postTextColor, setPostTextColor] = useState("inputGp");

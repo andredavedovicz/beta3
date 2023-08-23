@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+//Parte 3 do credenciamento
 function OtherInfo({ formData, setFormData }) {
   //Referencias
   const [respostas, setRespostas] = useState([]);

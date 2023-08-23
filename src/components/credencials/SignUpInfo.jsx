@@ -1,5 +1,5 @@
 import React from "react";
-
+//Parte 2 do Credenciamento
 function SignUpInfo({ formData, setFormData }) {
   return (
     <div className="sign-up-container">

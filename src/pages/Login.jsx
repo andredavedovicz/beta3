@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import SMOBILI from "../assets/SMOBILIC.png";
 function Login({ setIsAuth }) {
   let navigate = useNavigate();
+  //Entrar com o Google
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider).then((result) => {
       localStorage.setItem("isAuth", true);
@@ -15,6 +16,7 @@ function Login({ setIsAuth }) {
   const [password, setPassword] = useState();
   const [valueBlackOut, setValueBlackOut] = useState(true);
   const [alertPassword, setAlertPassword] = useState(true);
+  //Função para a tela de bloqueio
   const blackOut = () => {
     let truePassword = "maple@2023";
 

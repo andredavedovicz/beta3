@@ -1,5 +1,6 @@
 import React from "react";
 import SMOBILI from "../assets/SMOBILIC.png";
+//Página padrão
 const Principal = () => {
   return (
     <div className="loginPage">

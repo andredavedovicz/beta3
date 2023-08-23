@@ -29,7 +29,7 @@ function Form() {
   });
 
   const FormTitles = ["Seus Dados", "Dados da Empresa", "Outras Informações"];
-
+  //Troca as páginas
   const PageDisplay = () => {
     if (page === 0) {
       return <PersonalInfo formData={formData} setFormData={setFormData} />;
@@ -40,7 +40,7 @@ function Form() {
     }
   };
 
-  //Send to firebase
+  //Manda para o firebase
 
   const postsCollectionRef = collection(db, "credentials");
   let navigate = useNavigate();

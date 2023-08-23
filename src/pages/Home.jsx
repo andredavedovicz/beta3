@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Home({ isAuth }) {
   const [postList, setPostList] = useState([]);
   const postsCollectionRef = collection(db, "postsexample");
+  //para deletar a OS
   const deletePost = async (id) => {
     const postDoc = doc(db, "postsexample", id);
     await deleteDoc(postDoc);

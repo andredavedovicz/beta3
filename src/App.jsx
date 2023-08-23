@@ -9,9 +9,11 @@ import { HashRouter, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import Principal from "./pages/Principal";
 import Credentials from "./pages/Credentials";
+
+//App principal
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
-
+  //se o usuário sair
   const signUserOut = () => {
     signOut(auth).then(() => {
       localStorage.clear();
