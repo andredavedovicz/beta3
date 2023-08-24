@@ -1,3 +1,4 @@
+//Bibliotecas e componentes externos
 import React from "react";
 import SMOBILI from "../assets/SMOBILIC.png";
 //Página padrão

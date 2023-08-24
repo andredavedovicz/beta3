@@ -1,3 +1,4 @@
+//Bibliotecas e componentes externos
 import React from "react";
 import { useState } from "react";
 import { addDoc, collection, getDocs } from "firebase/firestore";
@@ -8,6 +9,7 @@ import { storage } from "../firebase-config";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 function CreatePost({ isAuth }, key) {
+  //Variáveis das informações
   let navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [objeto, setObjeto] = useState("");

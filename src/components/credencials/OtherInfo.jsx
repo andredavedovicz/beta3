@@ -1,14 +1,15 @@
+//Bibliotecas e componentes externos
 import React, { useEffect, useState } from "react";
 //Parte 3 do credenciamento
 function OtherInfo({ formData, setFormData }) {
-  //Referencias
+  //Variaveis das Referencias
   const [respostas, setRespostas] = useState([]);
   const [novaResposta, setNovaResposta] = useState("");
 
-  //Areas de atuação
+  //Variaveis das Areas de atuação
   const [respostasAtuacao, setRespostasAtuacao] = useState([]);
   const [novaRespostaAtuacao, setNovaRespostaAtuacao] = useState("");
-  //Referencias
+  //Função para armazenar nas Variaveis das Referencias
   const handleRespostaChange = (event) => {
     const novaResposta = event.target.value;
     setNovaResposta(novaResposta);
@@ -23,7 +24,7 @@ function OtherInfo({ formData, setFormData }) {
   const handleRemoverResposta = () => {
     setFormData({ ...formData, referencias: respostas.pop() });
   };
-  //Areas de atuação
+  //Função para armazenar nas Variaveis das Areas de atuação
   const handleRespostaChangeAtuacao = (event) => {
     const novaRespostaAtuacao = event.target.value;
     setNovaRespostaAtuacao(novaRespostaAtuacao);
@@ -37,7 +38,7 @@ function OtherInfo({ formData, setFormData }) {
   const handleRemoverRespostaAtuacao = () => {
     setFormData({ ...formData, areasDeAtuação: respostasAtuacao.pop() });
   };
-  //useEffect
+  //useEffect=usado para trabalhar de forma simultanea na hora da renderização da tela
   useEffect(() => {
     setFormData({ ...formData, areasDeAtuação: respostasAtuacao });
   }, [respostasAtuacao, setFormData]);
@@ -50,7 +51,6 @@ function OtherInfo({ formData, setFormData }) {
         <div className="label">
           Referencias:
         </div>
-        
         <input
           type="text"
           value={novaResposta}

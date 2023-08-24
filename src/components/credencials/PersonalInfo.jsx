@@ -1,3 +1,4 @@
+//Bibliotecas e componentes externos
 import React from "react";
 //Parte 1 do Credenciamento
 function PersonalInfo({ formData, setFormData }) {

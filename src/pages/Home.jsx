@@ -1,3 +1,4 @@
+//Bibliotecas e componentes externos
 import React, { useState, useEffect } from "react";
 import { deleteDoc, getDocs, doc } from "firebase/firestore";
 import { collection,query, orderBy} from "firebase/firestore";

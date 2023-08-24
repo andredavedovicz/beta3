@@ -1,3 +1,4 @@
+//Bibliotecas e componentes externos
 import React, { useState } from "react";
 import SignUpInfo from "../components/credencials/SignUpInfo";
 import PersonalInfo from "../components/credencials/PersonalInfo";
@@ -6,6 +7,8 @@ import "../styles/Credentials.css"
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
+
+// Página para fazer o credenciamento
 function Form() {
   const [page, setPage] = useState(0);
   const [formData, setFormData] = useState({

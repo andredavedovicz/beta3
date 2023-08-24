@@ -1,3 +1,4 @@
+//Bibliotecas e componentes externos
 import React, { useState } from "react";
 import { auth, provider } from "../firebase-config";
 import { signInWithPopup } from "firebase/auth";
